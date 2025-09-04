@@ -144,6 +144,7 @@ void WIFI_AccessPoint()
 {
   LED_SendCmd(LED_CMD_AP_MODE);
 
+  WiFi.mode(WIFI_OFF);
   WiFi.softAP(CONFIG_WIFI_AP_SSID, CONFIG_WIFI_AP_PASSWORD, 6);
   log_i("Access Point IP: %s", WiFi.softAPIP().toString().c_str());
 
@@ -189,6 +190,7 @@ void WIFI_Init()
       if (millis() - connect_time >= CONFIG_WIFI_CONNECT_TIMEOUT) {
         log_e("WiFi Connect Failed! Goto Access Point mode!");
         WIFI_AccessPoint();
+        break;
       }
     }
 
